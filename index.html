@@ -1,72 +1,232 @@
-<!DOCTYPE html>
+# Create a minimal "clean studio" template inspired by schick-toikka.com/studio
+# Files: index.html, styles.css, script.js, assets/ (placeholders)
+import os, zipfile, textwrap
+
+root = "/mnt/data/carson-clean-studio"
+assets = os.path.join(root, "assets")
+os.makedirs(assets, exist_ok=True)
+
+index_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Carson.fm</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      background: #fdfdfd;
-      color: #111;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 3em;
-      margin-bottom: 0.5em;
-    }
-    h2 {
-      margin-top: 2em;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.2em;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 0.5em 0;
-    }
-    a {
-      text-decoration: none;
-      color: #222;
-    }
-    a:hover {
-      color: #3f7df8;
-    }
-    footer {
-      margin-top: 3em;
-      text-align: center;
-      font-size: 0.8em;
-      color: #777;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carson Masterson — Studio</title>
+  <meta name="description" content="Work, writing, and art by Carson Masterson." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Carson.fm</h1>
+  <header class="site-header">
+    <div class="brand">
+      <a href="#" class="logo">Carson</a>
+      <a href="#" class="logo alt">Masterson</a>
+    </div>
+    <nav class="site-nav">
+      <a href="#work" class="active">Work</a>
+      <a href="#writing">Writing</a>
+      <a href="#art">Art</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
 
-  <h2>Starters</h2>
-  <p>Stories, music, experiments.</p>
+  <main>
+    <!-- Work -->
+    <section id="work" class="section">
+      <div class="section-title">Projects</div>
+      <div class="rule"></div>
+      <div class="list two-col">
+        <article class="item">
+          <a class="item-link" href="#" target="_blank">
+            <div class="thumb" style="background-image:url('assets/thumb1.jpg');"></div>
+            <div class="meta">
+              <h3 class="title">PoolSuite‑style Landing</h3>
+              <p class="desc">Video background + audio player for Carson.fm</p>
+              <p class="tags">Video • Web</p>
+            </div>
+          </a>
+        </article>
+        <article class="item">
+          <a class="item-link" href="#" target="_blank">
+            <div class="thumb" style="background-image:url('assets/thumb2.jpg');"></div>
+            <div class="meta">
+              <h3 class="title">Innovation Studio Stories</h3>
+              <p class="desc">Short films & stills for IBM Financial Services</p>
+              <p class="tags">Photo • Film</p>
+            </div>
+          </a>
+        </article>
 
-  <h2>Mains</h2>
-  <ul>
-    <li><a href="#">Podcast</a></li>
-    <li><a href="#">Writing</a></li>
-    <li><a href="#">Projects</a></li>
-    <li><a href="#">About</a></li>
-  </ul>
+        <article class="item">
+          <a class="item-link" href="#" target="_blank">
+            <div class="thumb" style="background-image:url('assets/thumb3.jpg');"></div>
+            <div class="meta">
+              <h3 class="title">Generative AI Demos</h3>
+              <p class="desc">Narratives & product explainer design</p>
+              <p class="tags">Design • Writing</p>
+            </div>
+          </a>
+        </article>
+        <article class="item">
+          <a class="item-link" href="#" target="_blank">
+            <div class="thumb" style="background-image:url('assets/thumb4.jpg');"></div>
+            <div class="meta">
+              <h3 class="title">Concert Photography</h3>
+              <p class="desc">Nightlife, performances, and Boiler‑Room style</p>
+              <p class="tags">Photo</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
 
-  <h2>Dessert</h2>
-  <ul>
-    <li><a href="mailto:carsonrmasterson@mgmail.com">Email</a></li>
-    <li><a href="https://instagram.com/carsonmasterson">Instagram</a></li>
-    <li><a href="https://twitter.com/carsonmasterson">Twitter</a></li>
-  </ul>
+    <!-- Writing -->
+    <section id="writing" class="section">
+      <div class="section-title">Writing</div>
+      <div class="rule"></div>
+      <ul class="text-list">
+        <li><a href="#" target="_blank">The Future of the Internet is Cognitive Infrastructure</a><span>Essay</span></li>
+        <li><a href="#" target="_blank">AI is the Middleware</a><span>Notes</span></li>
+        <li><a href="#" target="_blank">Office Hours with Carson — Selected</a><span>Series</span></li>
+      </ul>
+    </section>
 
-  <footer>
-    &copy; 2025 Carson Masterson
+    <!-- Art -->
+    <section id="art" class="section">
+      <div class="section-title">Art</div>
+      <div class="rule"></div>
+      <div class="list three-col">
+        <div class="tile" style="background-image:url('assets/art1.jpg');"></div>
+        <div class="tile" style="background-image:url('assets/art2.jpg');"></div>
+        <div class="tile" style="background-image:url('assets/art3.jpg');"></div>
+        <div class="tile" style="background-image:url('assets/art4.jpg');"></div>
+        <div class="tile" style="background-image:url('assets/art5.jpg');"></div>
+        <div class="tile" style="background-image:url('assets/art6.jpg');"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="section-title">About</div>
+      <div class="rule"></div>
+      <div class="about">
+        <p>I’m Carson Masterson — a creative technologist focused on banking, AI, and storytelling. I produce video, design simple systems, and host <a href="https://carson.fm" target="_blank">Carson.fm</a>.</p>
+        <p>Contact: <a href="mailto:you@email.com">you@email.com</a> · <a href="https://instagram.com/" target="_blank">Instagram</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>© <span id="year"></span> Carson Masterson</div>
   </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // simple nav highlight
+    const links = document.querySelectorAll('.site-nav a');
+    links.forEach(a=>a.addEventListener('click', e=>{
+      links.forEach(x=>x.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+    }));
+  </script>
 </body>
 </html>
+"""
+
+styles_css = """/* Minimal, crisp typography inspired by Schick–Toikka */
+:root{
+  --bg:#ffffff;
+  --ink:#111;
+  --muted:#6a6a6a;
+  --rule:#cfcfcf;
+  --max:1150px;
+}
+*{box-sizing:border-box}
+html,body{padding:0;margin:0}
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.55;
+}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+/* Header */
+.site-header{
+  max-width:var(--max);
+  margin:28px auto 10px;
+  padding:0 24px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+.brand{
+  display:flex; gap:20px; align-items:flex-end;
+}
+.logo{font-size:56px; font-weight:300; letter-spacing:.5px}
+.logo.alt{font-size:56px; font-weight:300; opacity:.9}
+.site-nav a{
+  margin-left:18px; font-size:14px; letter-spacing:.4px; color:var(--muted);
+}
+.site-nav a.active{color:var(--ink); text-decoration:underline}
+/* Sections */
+.section{max-width:var(--max); margin:36px auto 56px; padding:0 24px}
+.section-title{
+  font-size:14px; letter-spacing:.5px; font-weight:600; margin-bottom:6px
+}
+.rule{height:1px; background:var(--rule); margin:6px 0 18px}
+/* Project list */
+.list{display:grid; gap:22px}
+.two-col{grid-template-columns:1fr 1fr}
+.three-col{grid-template-columns:repeat(3,1fr)}
+.item{border-top:1px solid var(--rule); padding-top:14px}
+.item-link{display:flex; gap:16px}
+.thumb{
+  width:160px; height:110px; background:#eee center/cover no-repeat; border:1px solid #eaeaea
+}
+.meta .title{font-size:24px; font-weight:500; margin:0 0 6px}
+.meta .desc{font-size:14px; color:var(--muted); margin:0 0 6px}
+.meta .tags{font-size:12px; color:var(--muted)}
+/* Writing list */
+.text-list{list-style:none; padding:0; margin:0}
+.text-list li{
+  display:flex; justify-content:space-between; border-top:1px solid var(--rule);
+  padding:10px 0; font-size:15px
+}
+.text-list li span{color:var(--muted); margin-left:16px}
+/* Art grid */
+.tile{aspect-ratio:4/3; background:#eee center/cover no-repeat; border:1px solid #eaeaea}
+/* About */
+.about{max-width:700px; font-size:16px; color:#2a2a2a}
+/* Footer */
+.site-footer{max-width:var(--max); margin:60px auto 32px; padding:0 24px; color:var(--muted); font-size:12px}
+/* Responsive */
+@media (max-width:980px){
+  .two-col{grid-template-columns:1fr}
+  .three-col{grid-template-columns:1fr 1fr}
+  .logo,.logo.alt{font-size:40px}
+  .thumb{width:130px;height:90px}
+}
+@media (max-width:600px){
+  .three-col{grid-template-columns:1fr}
+  .brand{gap:12px}
+  .logo,.logo.alt{font-size:34px}
+}
+"""
+
+# Placeholder asset notes (blank images not necessary; user will replace)
+for i in range(1,7):
+    with open(os.path.join(assets, f"art{i}.jpg"), "wb") as f: f.write(b"")
+for i in range(1,5):
+    with open(os.path.join(assets, f"thumb{i}.jpg"), "wb") as f: f.write(b"")
+
+# Zip it all
+zip_path = "/mnt/data/carson-clean-studio.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for dirpath, _, filenames in os.walk(root):
+        for fn in filenames:
+            full = os.path.join(dirpath, fn)
+            arc = os.path.relpath(full, root)
+            z.write(full, arcname=arc)
+
+zip_path
